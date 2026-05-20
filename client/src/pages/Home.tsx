@@ -14,7 +14,7 @@ interface Blog {
   blog_prv_text: string
   blog_img_src: string
   user_id: number
-  timestamp: string
+  created_at: string
 }
 
 const projects = [
@@ -149,7 +149,7 @@ const Home = () => {
                 blogTitle={blog.title}
                 blogImgSrc={blog.blog_img_src}
                 blogPrvText={blog.blog_prv_text}
-                blogDate={new Date(blog.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} />
+                blogDate={new Date(blog.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} />
             ))}
           </ul>
 

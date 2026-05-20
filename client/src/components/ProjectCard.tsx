@@ -33,15 +33,15 @@ const ProjectCard = ({ projectGithubUrl, projectPrvText, projectTitle, projectTi
 
             {/* Hover */}
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
-                <p className="text-[14px] text-text-muted">Made with</p>
-                <ul className="text-[12px] text-black bg-white mb-4 flex gap-1 px-2 py-[2px] w-fit line-clamp-1">
+                <p className="text-[14px] text-text-muted [@media(hover:none)]:opacity-100">Made with</p>
+                <ul className="text-[12px] text-black bg-white mb-4 flex gap-1 px-2 py-[2px] w-fit line-clamp-1 [@media(hover:none)]:opacity-100">
                     {projectTech.map((tech, index) => (
                         <li key={tech}>
                             {tech}{index < projectTech.length - 1 ? ',' : ''}
                         </li>
                     ))}
                 </ul>
-                <a className="font-display text-text-strong text-[16px]" href={projectGithubUrl}>GitHub</a>
+                <a className="font-display text-text-strong text-[16px] [@media(hover:none)]:opacity-100" href={projectGithubUrl}>GitHub</a>
             </div>
         </article>
     )
