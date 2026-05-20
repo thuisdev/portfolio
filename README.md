@@ -399,10 +399,13 @@ Nginx (Port 443 / HTTPS)
 
 | Test | Result |
 |------|--------|
-| HTTP → HTTPS redirect | ✅ http://adrianthuis.dev redirects to https:// |
-| Live URL | https://adrianthuis.dev |
-| Mobile | ✅ Tested on Android/iOS |
-| Desktop | ✅ Tested on Chrome/Firefox |
+| HTTP → HTTPS redirect | ✅ Automatically redirects |
+| SSL Certificate | ✅ Let's Encrypt, valid until Aug 2026 |
+| Mobile | ✅ Responsive on Android/iOS |
+
+![SSL Certificate](docs/zertifikat.png)
+![HTTPS Redirect](docs/https-redirect.png)
+![Mobile](docs/mobile.png)
 
 ### Security Hardening
 
