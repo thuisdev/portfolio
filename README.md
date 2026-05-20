@@ -403,9 +403,9 @@ Nginx (Port 443 / HTTPS)
 | SSL Certificate | ✅ Let's Encrypt, valid until Aug 2026 |
 | Mobile | ✅ Responsive on Android/iOS |
 
-![SSL Certificate](docs/zertifikat.png)
-![HTTPS Redirect](docs/https-redirect.png)
-![Mobile](docs/mobile.png)
+<img src="docs/certificate.png" width="600" alt="SSL Certificate" />
+<img src="docs/https.png" width="600" alt="HTTPS Redirect" />
+<img src="docs/mobile.png" width="300" alt="Mobile" />
 
 ### Security Hardening
 

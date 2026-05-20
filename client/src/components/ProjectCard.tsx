@@ -32,7 +32,7 @@ const ProjectCard = ({ projectGithubUrl, projectPrvText, projectTitle, projectTi
             <p className="text-[14px] text-text-muted mb-3 line-clamp-3 ">{projectPrvText}</p>
 
             {/* Hover */}
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
+            <div className="opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity duration-300 mt-auto">
                 <p className="text-[14px] text-text-muted [@media(hover:none)]:opacity-100">Made with</p>
                 <ul className="text-[12px] text-black bg-white mb-4 flex gap-1 px-2 py-[2px] w-fit line-clamp-1 [@media(hover:none)]:opacity-100">
                     {projectTech.map((tech, index) => (
