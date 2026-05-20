@@ -357,6 +357,53 @@ A Postman collection is included for manual API testing.
 
 ---
 
+## 🌐 Deployment
+
+**Live:** [https://adrianthuis.dev](https://adrianthuis.dev)
+
+### Infrastructure
+
+| Component | Technology |
+|-----------|-----------|
+| **Cloud** | AWS EC2 (Ubuntu 26.04 LTS, t3.micro) |
+| **Web Server** | Nginx (reverse proxy + static file serving) |
+| **Process Manager** | PM2 (auto-restart + boot persistence) |
+| **SSL** | Let's Encrypt via Certbot (auto-renewal) |
+| **Domain** | adrianthuis.dev (Porkbun) |
+
+### Traffic Flow
+
+```
+Internet
+    ↓
+Nginx (Port 443 / HTTPS)
+    ├── /*       →  React dist/ (static files)
+    └── /api/*   →  Express :3000 (managed by PM2)
+```
+
+### Deployment Steps
+
+1. Launch EC2 instance with Elastic IP (Ubuntu 26.04 LTS)
+2. Create non-root user and configure SSH key-based auth
+3. Install Node.js via NVM, Git, PostgreSQL, Nginx, PM2
+4. Clone repository and run `npm run install:all`
+5. Configure `server/.env` and `client/.env`
+6. Initialize and seed database: `npm run db:init && npm run db:seed`
+7. Build React frontend: `npm run build:frontend`
+8. Configure Nginx as reverse proxy for `/api` and static files
+9. Start Express with PM2: `pm2 start index.js && pm2 startup && pm2 save`
+10. Point domain DNS A Record to Elastic IP
+11. Issue SSL certificate: `sudo certbot --nginx -d adrianthuis.dev`
+
+### Security Hardening
+
+- SSH restricted to trusted IP only (AWS Security Group)
+- Password-based SSH authentication disabled
+- PostgreSQL not exposed to public internet
+- HTTPS enforced — HTTP redirects to HTTPS via Nginx
+
+---
+
 ## 🔒 Security
 
 - ✅ Passwords hashed with **bcrypt** (salt rounds: 10)
