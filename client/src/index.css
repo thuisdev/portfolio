@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+@theme {
+  /* Fonts */
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-inria: "Inria Serif", serif;
+
+  /* Surfaces */
+  --color-base: #000000;
+  --color-surface: #18181B;
+
+  /* Borders */
+  --color-border-default: #3f3f46;
+  --color-border-purple: #7C3AED;
+
+  /* Text */
+  --color-text-subtle: #52525B;
+  --color-text-muted: #71717A;
+  --color-text-body: #94A3B8;
+  --color-text-strong: #FFFFFF;
+
+  /* Brand */
+  --color-brand: #A855F7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-body bg-black text-text-body text-center;
+}

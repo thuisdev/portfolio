@@ -1,0 +1,58 @@
+import { useParams, Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { getBlogById } from "../api/blogs"
+
+interface Blog {
+  blog_id: number
+  title: string
+  content: string
+  blog_prv_text: string
+  blog_img_src: string
+  user_id: number
+  timestamp: string
+}
+
+const SingleBlog = () => {
+  const { id } = useParams()
+
+  const [blog, setBlog] = useState<Blog | null>(null)
+  useEffect(() => {
+    getBlogById(id!).then((res: any) => setBlog(res.data[0]))
+  }, [id])
+
+  return (
+    <>
+      <article className="border-b border-border-default">
+        <header className="min-h-[calc(100vh-64px)] text-left px-5 py-7 bg-cover bg-center bg-no-repeat h-70 md:h-100 lg:h-150 relative flex flex-col justify-between"
+          style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/800/400')" }}>
+          <Link to="/blogs"
+            className="text-[16px] text-text-muted hover:text-white transition-colors duration-300">
+            Back to Blogs
+          </Link>
+
+          <h1 className="font-display text-text-strong text-[36px] md:text-[56px] lg:text-[60px] font-semibold text-left mt-auto">
+            {blog?.title}
+          </h1>
+
+          <div className="flex justify-between items-start">
+            <p className="text-text-muted text-[12px] lg:text-[13px] mt-6">#METANA #WEB3 #DEV</p>
+
+            <p className="text-text-muted text-[12px] lg:text-[13px] text-right">Written by <br />
+              <span className="text-white text-[14px] lg:text-[15px]">Blanca Luci</span></p>
+          </div>
+        </header>
+        <div className="px-5 py-7 text-left">
+          <p className="text-[16px] leading-relaxed mb-6">
+            {blog?.content}
+          </p>
+          <time dateTime="2026-04-21" className="block text-text-muted text-[12px] tracking-[2px] text-right">{blog?.timestamp && new Date(blog.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+
+          {/* <!-- Scroll to Top Btn --> */}
+          <div className="justify-items-center mt-7"><a href="#top" className="flex items-center justify-center text-text-muted w-9 h-9 border-border-default border rounded-full hover:text-white hover:border-white/70 transition-colors duration-300">↑</a></div>
+        </div>
+      </article>
+    </>
+  )
+}
+
+export default SingleBlog
