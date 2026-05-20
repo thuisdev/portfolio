@@ -395,6 +395,15 @@ Nginx (Port 443 / HTTPS)
 10. Point domain DNS A Record to Elastic IP
 11. Issue SSL certificate: `sudo certbot --nginx -d adrianthuis.dev`
 
+### Post-Deployment Testing
+
+| Test | Result |
+|------|--------|
+| HTTP → HTTPS redirect | ✅ http://adrianthuis.dev redirects to https:// |
+| Live URL | https://adrianthuis.dev |
+| Mobile | ✅ Tested on Android/iOS |
+| Desktop | ✅ Tested on Chrome/Firefox |
+
 ### Security Hardening
 
 - SSH restricted to trusted IP only (AWS Security Group)
