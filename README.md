@@ -399,12 +399,10 @@ Nginx (Port 443 / HTTPS)
 
 | Test | Result |
 |------|--------|
-| HTTP → HTTPS redirect | ✅ Automatically redirects |
 | SSL Certificate | ✅ Let's Encrypt, valid until Aug 2026 |
 | Mobile | ✅ Responsive on Android/iOS |
 
 <img src="docs/certificate.png" width="600" alt="SSL Certificate" />
-<img src="docs/https.png" width="600" alt="HTTPS Redirect" />
 <img src="docs/mobile.png" width="300" alt="Mobile" />
 
 ### Security Hardening
