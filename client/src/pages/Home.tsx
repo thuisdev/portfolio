@@ -6,6 +6,7 @@ import { getAllBlogs } from "../api/blogs"
 import { AnimatePresence, motion } from "framer-motion"
 import BlockchainBackground from "../components/BlockchainBackground"
 import SkillsMarquee from "../components/SkillsMarquee"
+import { ProjectsData } from "../components/ProjectsData.tsx"
 
 interface Blog {
   blog_id: number
@@ -16,36 +17,6 @@ interface Blog {
   user_id: number
   created_at: string
 }
-
-const projects = [
-  {
-    projectImgSrc: "https://picsum.photos/200/200?random=1",
-    projectDemoLink: "https://demo.com",
-    projectTitle: "AI",
-    projectTitle2: "Dashboard",
-    projectPrvText: "AI-powered sales material generator.",
-    projectTech: ["React", "TypeScript", "Tailwind"],
-    projectGithubUrl: "https://github.com/thuisdev"
-  },
-  {
-    projectImgSrc: "https://picsum.photos/200/200?random=2",
-    projectDemoLink: "https://demo.com",
-    projectTitle: "Mood-based",
-    projectTitle2: "Todo-app",
-    projectPrvText: "A mood-based todo app with localStorage persistence and cookie support.",
-    projectTech: ["JavaScript", "CSS", "Node.js"],
-    projectGithubUrl: "https://github.com/thuisdev"
-  },
-  {
-    projectImgSrc: "https://picsum.photos/200/200?random=3",
-    projectDemoLink: "https://demo.com",
-    projectTitle: "Magic Number",
-    projectTitle2: "Game",
-    projectPrvText: "A number guessing game built with vanilla JavaScript and DOM manipulation.",
-    projectTech: ["JavaScript", "HTML", "CSS"],
-    projectGithubUrl: "https://github.com/thuisdev"
-  },
-]
 
 const heroHeaders = [
   "Hi, I am Adrian",
@@ -111,7 +82,7 @@ const Home = () => {
           <h2 className="font-display text-text-strong text-[32px] md:text-[40px] lg:text-[44px] font-semibold mb-10  md:mb-15">Featured Projects</h2>
           {/* <!-- Project Card --> */}
           <ul className="text-left grid grid-cols-[repeat(auto-fit,360px)] md:grid-cols-[repeat(auto-fit,368px)] justify-center gap-10">
-            {projects.map((project, index) => (
+            {ProjectsData.map((project, index) => (
               <ProjectCard key={index} {...project} />
             ))}
           </ul>
@@ -131,7 +102,7 @@ const Home = () => {
 
         {/* <!-- Icons --> */}
         <div className="w-full">
-        <SkillsMarquee />
+          <SkillsMarquee />
         </div>
 
       </section >
@@ -205,7 +176,7 @@ const Home = () => {
       </section>
 
       {/* <!-- Contact --> */}
-      < section id="contact" className="w-full border-b border-border-default py-10 md:py-0 px-5 md:px-8 " >
+      < section id="contact" className="w-full py-10 md:py-0 px-5 md:px-8 " >
         {/* <!-- Logo ---> */}
         < div className="md:hidden" >
           <a href="#top" className="block w-fit text-white font-display font-bold text-[20px] hover:text-brand/60 transition-colors duration-300 cursor-pointer mb-4">ΛT</a>

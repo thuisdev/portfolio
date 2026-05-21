@@ -9,7 +9,7 @@ interface Blog {
   blog_prv_text: string
   blog_img_src: string
   user_id: number
-  timestamp: string
+  created_at: string
 }
 
 const SingleBlog = () => {
@@ -22,8 +22,8 @@ const SingleBlog = () => {
 
   return (
     <>
-      <article className="border-b border-border-default">
-        <header className="min-h-[calc(100vh-64px)] text-left px-5 py-7 bg-cover bg-center bg-no-repeat h-70 md:h-100 lg:h-150 relative flex flex-col justify-between"
+      <article>
+        <header className="text-left px-5 py-7 bg-cover bg-center bg-no-repeat h-70 md:h-100 lg:h-150 relative flex flex-col justify-between"
           style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/800/400')" }}>
           <Link to="/blogs"
             className="text-[16px] text-text-muted hover:text-white transition-colors duration-300">
@@ -45,7 +45,7 @@ const SingleBlog = () => {
           <p className="text-[16px] leading-relaxed mb-6">
             {blog?.content}
           </p>
-          <time dateTime="2026-04-21" className="block text-text-muted text-[12px] tracking-[2px] text-right">{blog?.timestamp && new Date(blog.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+          <time dateTime="2026-04-21" className="block text-text-muted text-[12px] tracking-[2px] text-right">{blog?.created_at && new Date(blog.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
 
           {/* <!-- Scroll to Top Btn --> */}
           <div className="justify-items-center mt-7"><a href="#top" className="flex items-center justify-center text-text-muted w-9 h-9 border-border-default border rounded-full hover:text-white hover:border-white/70 transition-colors duration-300">↑</a></div>
