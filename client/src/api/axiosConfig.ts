@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getStoredToken } from './auth';
+import { getStoredToken, logout } from './auth';
 
 axios.interceptors.request.use(
     (config) => {
@@ -10,6 +10,21 @@ axios.interceptors.request.use(
         return config;
     },
     (error) => {
+        return Promise.reject(error);
+    }
+);
+
+axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const is401 = error.response?.status === 401;
+        const isAuthRoute = error.config?.url?.includes('/api/auth');
+
+        if (is401 && !isAuthRoute) {
+            logout();
+            window.location.href = '/login';
+        }
+
         return Promise.reject(error);
     }
 );
