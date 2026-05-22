@@ -22,6 +22,14 @@ const checkAuth = async (req, res, next) => {
     })
 }
 
+const requireAdmin = (req, res, next) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).send('Error: Admin access required')
+    }
+    next()
+}
+
 module.exports = {
     checkAuth,
+    requireAdmin
 }

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAllBlogs, createBlog, getBlogById, updateBlogById, deleteBlogById } = require("../db/blogQueries")
-const { checkAuth} = require ("../middleware/auth-middleware")
+const { checkAuth, requireAdmin } = require ("../middleware/auth-middleware")
 
 // Get all Blogs
 router.get('/', async (req, res) => {
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 
 
 // Create a new Blog
-router.post('/', checkAuth, async (req, res) => {
+router.post('/', checkAuth, requireAdmin, async (req, res) => {
     const {title, content, blogPrvText, blogImgSrc, userId} = req.body
     try{
         if (!title || !content || !blogPrvText || !blogImgSrc || !userId) {
@@ -43,7 +43,7 @@ router.post('/', checkAuth, async (req, res) => {
 });
 
 // Update a Blog by id
-router.put('/:id', checkAuth, async (req, res) => {
+router.put('/:id', checkAuth, requireAdmin, async (req, res) => {
     const blogId = req.params.id
     const {title, content, blogPrvText, blogImgSrc, userId} = req.body
     try{
@@ -59,7 +59,7 @@ router.put('/:id', checkAuth, async (req, res) => {
 });
 
 // Delete Blog by id
-router.delete('/:id', checkAuth, async (req, res) => {
+router.delete('/:id', checkAuth, requireAdmin, async (req, res) => {
     const blogId = req.params.id
     try{
         const blog = await deleteBlogById(blogId)

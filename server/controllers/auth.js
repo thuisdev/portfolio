@@ -6,9 +6,6 @@ const { getUserById, getUserByUsername, getUserByEmail, createUser } = require('
 
 const register = async (req, res) => {
     const { username, name, email, password } = req.body
-    let { role } = req.body
-
-    role = role || 'user'
 
     try {
 
@@ -40,7 +37,7 @@ const register = async (req, res) => {
         }
 
         const hashedPassword = await hashPassword(password)
-        const newUser = await createUser(username, name, email, hashedPassword, role)
+        const newUser = await createUser(username, name, email, hashedPassword, 'user')
 
         const payload = {
             user_id: newUser[0].user_id,
@@ -60,6 +57,7 @@ const register = async (req, res) => {
     }
     catch (error) {
         console.error('❌ REGISTRATION ERROR:', error.message);
+        res.status(500).json({ error: 'Server error' })
     }
 }
 

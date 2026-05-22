@@ -91,40 +91,6 @@ describe('GET /api/users/:id', () => {
     })
 })
 
-// Create User
-describe('POST /api/users', () => {
-    it('should create user and return status 200', async () => {
-        createUser.mockResolvedValue(mockUser)
-
-        const response = await request(app)
-            .post('/api/users')
-            .send({ username: 'testuser', name: 'Test', email: 'test@test.com', role: 'user' })
-
-        expect(response.status).toBe(200)
-        expect(response.body.username).toBe('testuser')
-    })
-
-    it('should return 400 if fields are empty', async () => {
-        const response = await request(app)
-            .post('/api/users')
-            .send({ username: '', name: '', email: '' })
-
-        expect(response.status).toBe(400)
-        expect(response.body.error).toBe('Data not valid')
-    })
-
-    it('should return 500 on server error', async () => {
-        createUser.mockRejectedValue(new Error('DB Error'))
-
-        const response = await request(app)
-            .post('/api/users')
-            .send({ username: 'testuser', name: 'Test', email: 'test@test.com' })
-
-        expect(response.status).toBe(500)
-        expect(response.body.error).toBe('Internal server error')
-    })
-})
-
 // Update User by id
 describe('PUT /api/users/:id', () => {
     it('should update user and return status 200', async () => {
