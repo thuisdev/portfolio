@@ -21,10 +21,10 @@
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
-- JWT-based secure authentication
-- Password hashing with bcrypt
-- Role-based access control (Admin/User)
-- Protected routes and API endpoints
+- JWT-based authentication with server-side session validation (`/api/auth/me`)
+- Role-based access control enforced at API level
+- Rate-limited auth endpoints (brute-force protection)
+- Auto-logout on expired tokens
 
 ### 📝 Blog Management
 - Create, read, update, and delete blog posts
@@ -117,6 +117,8 @@ After seeding the database, use these accounts:
 |------|----------|----------|
 | Admin | `admin` | `admin123` |
 | User | `testuser` | `user123` |
+
+> ⚠️ Default credentials are for local development only. In production, set admin credentials via environment variables in your seed script.
 
 ---
 
@@ -313,7 +315,7 @@ A Postman collection is included for manual API testing.
 | Layer | Technologies |
 |-------|-------------|
 | **Frontend** | React 19, TypeScript, Vite, TailwindCSS v4, React Router v7, Axios, Framer Motion, EmailJS |
-| **Backend** | Node.js, Express 5, PostgreSQL, JWT, bcrypt, validator |
+| **Backend** | Node.js, Express 5, PostgreSQL, JWT, bcrypt, Helmet, express-rate-limit, validator |
 | **Testing** | Jest, Supertest, React Testing Library, Selenium WebDriver, Babel |
 
 ---
@@ -417,11 +419,17 @@ Nginx (Port 443 / HTTPS)
 ## 🔒 Security
 
 - ✅ Passwords hashed with **bcrypt** (salt rounds: 10)
-- ✅ **JWT tokens** for stateless authentication
+- ✅ **JWT tokens** for stateless authentication with `/api/auth/me` session validation
+- ✅ **Role-based access control** enforced server-side via `requireAdmin` middleware
+- ✅ **Helmet.js** for secure HTTP headers
+- ✅ **CORS** restricted to configured origin only
+- ✅ **Rate limiting** on auth routes (10 requests / 15 min)
 - ✅ **Input validation** on all user inputs
-- ✅ **Protected routes** require valid JWT tokens
-- ✅ **Role-based access** for admin-only features
 - ✅ **SQL injection prevention** via parameterized queries
+- ✅ **Password hashes sanitized** from all API responses
+- ✅ **Author attribution** from JWT (not client-trusted)
+- ✅ **Generic auth errors** prevent user enumeration
+- ✅ **Auto-logout** on 401 via Axios interceptor
 
 ---
 
@@ -436,6 +444,9 @@ HOST=localhost
 DATABASE=your_database
 PASSWORD=your_password
 DB_PORT=5432
+
+# CORS
+CLIENT_ORIGIN=http://localhost:5173
 
 PORT=3000
 

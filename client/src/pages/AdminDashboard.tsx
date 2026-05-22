@@ -79,7 +79,7 @@ const AdminDashboard = () => {
     const handleEditBlog = async (blogId: number, blogData: BlogData) => {
         try {
             const updatedBlog = await updateBlog(blogId.toString(), blogData);
-            setBlogs(blogs.map(b => b.blog_id === blogId ? updatedBlog.data : b))
+            setBlogs(blogs.map(b => b.blog_id === blogId ? updatedBlog.data[0] : b))
             setEditBlog(null)
         } catch (error) {
             alert('Failed to update the blog')

@@ -16,15 +16,29 @@ const SingleBlog = () => {
   const { id } = useParams()
 
   const [blog, setBlog] = useState<Blog | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
   useEffect(() => {
-    getBlogById(id!).then((res: any) => setBlog(res.data[0]))
+    const initBlog = async () => {
+      try {
+        const res = await getBlogById(id!)
+        setBlog((res.data as any)[0])
+        setLoading(false)
+      }
+      catch (err) {
+        setError('Failed to load blog')
+        setLoading(false)
+      }
+    }
+    initBlog()
   }, [id])
 
   return (
     <>
       <article>
         <header className="text-left px-5 py-7 bg-cover bg-center bg-no-repeat h-70 md:h-100 lg:h-150 relative flex flex-col justify-between"
-          style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/800/400')" }}>
+          style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${blog?.blog_img_src}')` }}>
           <Link to="/blogs"
             className="text-[16px] text-text-muted hover:text-white transition-colors duration-300">
             Back to Blogs
@@ -33,6 +47,9 @@ const SingleBlog = () => {
           <h1 className="font-display text-text-strong text-[36px] md:text-[56px] lg:text-[60px] font-semibold text-left mt-auto">
             {blog?.title}
           </h1>
+
+          {loading && <p>Loading...</p>}
+          {error && <p>{error}</p>}
 
           <div className="flex justify-between items-start">
             <p className="text-text-muted text-[12px] lg:text-[13px] mt-6">#METANA #WEB3 #DEV</p>

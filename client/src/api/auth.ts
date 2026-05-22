@@ -51,8 +51,15 @@ export const getStoredToken = (): string | null => {
 };
 
 export const getStoredUser = () => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+    try {
+        const user = localStorage.getItem('user');
+        return user ? JSON.parse(user) : null;
+    }
+    catch (erro) {
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        return null
+    }
 };
 
 export const getMe = async () => {

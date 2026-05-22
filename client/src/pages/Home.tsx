@@ -33,8 +33,24 @@ const heroHeaders = [
 
 const Home = () => {
   const [blogs, setBlogs] = useState<Blog[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
   useEffect(() => {
-    getAllBlogs().then((res: any) => setBlogs(res.data))
+
+    const blogsInit = async () => {
+
+      try {
+        const res = await getAllBlogs()
+        setBlogs(res.data as Blog[])
+        setLoading(false)
+      }
+      catch (err) {
+        setError('Failed to load blogs')
+        setLoading(false)
+      }
+    }
+    blogsInit()
   }, [])
 
 
@@ -113,6 +129,8 @@ const Home = () => {
           <h2 className="font-display text-text-strong text-[32px] md:text-[40px] lg:text-[44px] font-semibold mb-10 md:mb-15">Blogs</h2>
           {/* <!-- Blog Card --> */}
           <ul className="flex flex-wrap gap-4 md:gap-6 lg:gap-8 justify-center">
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
             {blogs.map(blog => (
               <BlogCard
                 key={blog.blog_id}
