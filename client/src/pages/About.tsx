@@ -3,7 +3,7 @@ import BlockchainBackground from "../components/BlockchainBackground"
 const About = () => {
   return (
     <>
-      <section id="aboutMe" className="flex items-center justify-center w-full py-16 md:py-20 lg:py-32 px-5 h-[calc(100vh-64px)] min-h-[calc(100vh-64px)]">
+      <section id="aboutMe" className="flex items-center justify-center w-full py-16 md:py-20 lg:py-32 px-5 min-h-[calc(100vh-64px)]">
 
         <BlockchainBackground />
 

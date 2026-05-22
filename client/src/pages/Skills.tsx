@@ -5,7 +5,7 @@ const Skills = () => {
     return (
         <>
             {/* Skills & Experience */}
-            < section id="skills" className="items-center justify-center py-16 md:py-20 lg:py-32 w-full flex flex-col px-5 md:px-8 py-16 md:py-20 h-[calc(100vh-64px)] min-h-[calc(100vh-64px)]" >
+            < section id="skills" className="items-center justify-center py-16 md:py-20 lg:py-32 w-full flex flex-col px-5 md:px-8 py-16 md:py-20 min-h-[calc(100vh-64px)]" >
                 <BlockchainBackground />
 
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.5)_0%,transparent_60%)] pointer-events-none" />

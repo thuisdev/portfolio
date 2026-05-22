@@ -9,8 +9,8 @@ export const ProjectsData = [
     projectGithubUrl: "https://github.com/thuisdev"
   },
   {
-    projectImgSrc: "https://picsum.photos/200/200?random=2",
-    projectDemoLink: "https://demo.com",
+    projectImgSrc: "/public/projects/mood-todo.png",
+    projectDemoLink: "https://mood-based-todo-app-zeta.vercel.app/",
     projectTitle: "Mood-based-todo-app",
     projectTitle2: "Todo-app",
     projectPrvText: "A mood-based todo app with localStorage persistence and cookie support.",

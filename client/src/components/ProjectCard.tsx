@@ -16,12 +16,12 @@ const ProjectCard = ({ projectGithubUrl, projectPrvText, projectTitle, projectTi
                         hover:shadow-[4px_4px_0_0_white]
                         has-[.preview:hover]:shadow-none">
 
-            <div className="preview w-[200px] h-[200px] bg-border-default border border-white
+            <div className="preview h-[200px] w-fit bg-border-default border border-white overflow-hidden
                             transition-shadow duration-300
-                            hover:shadow-[4px_4px_0_0_white]">
+                            hover:shadow-[4px_4px_0_0_white] mr-5">
 
                 <a href={projectDemoLink}>
-                    <img src={projectImgSrc} alt="Project Preview" />
+                    <img src={projectImgSrc} alt="Project Preview" className="h-full object-cover"/>
                 </a>
             </div>
             <h3 className="font-display text-[24px] font-semibold text-text-strong  mt-4 mb-4
