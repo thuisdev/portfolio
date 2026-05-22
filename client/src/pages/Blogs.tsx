@@ -20,7 +20,7 @@ const Blogs = () => {
 
   return (
     <>
-      <section id="blogs" className="w-full pt-13 pb-16 md:pb-20 md:pt-13 px-5 h-[calc(100vh-64px)] min-h-[calc(100vh-64px)]">
+      <section id="blogs" className="w-full pt-13 pb-16 md:pb-20 md:pt-13 px-5 min-h-[calc(100vh-64px)]">
 
         <h1 className="font-display text-text-strong text-[36px] md:text-[40px] lg:text-[44px] font-bold mb-10">Blogs</h1>
         {/* <!-- Blog Card --> */}
