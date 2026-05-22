@@ -46,7 +46,10 @@ const createUser = async (username, name, email, hashedPassword, role) => {
 
 // Update User By id
 const updateUserById = async (name, email, id) => {
-    const queryTx = `UPDATE Users SET name = $1, email = $2 WHERE user_id = $3 RETURNING *`
+    const queryTx = `
+    UPDATE Users SET name = $1, email = $2 
+    WHERE user_id = $3 
+    RETURNING *`
 
     const user = await pool.query(queryTx, [name, email, id])
     return user.rows
@@ -54,7 +57,9 @@ const updateUserById = async (name, email, id) => {
 
 // Delete User By id
 const deleteUserById = async (id) => {
-    const queryTx = `DELETE FROM Users WHERE user_id = $1 RETURNING *`
+    const queryTx = `DELETE FROM Users 
+    WHERE user_id = $1 
+    RETURNING *`
 
     const user = await pool.query(queryTx, [id])
     return user.rows

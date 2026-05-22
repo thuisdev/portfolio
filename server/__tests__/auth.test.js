@@ -72,11 +72,11 @@ describe('POST /api/auth/login', () => {
                 username: 'invaliduser',
                 password: 'user123'
             });
-        expect(response.status).toBe(404);
-        expect(response.body.error).toBe('User not found')
+        expect(response.status).toBe(401);
+        expect(response.body.error).toBe('Username or password is invalid')
     })
 
-    it('should return 401 if password is invalid', async () => {
+    it('should return 404 if password is invalid', async () => {
         comparePassword.mockResolvedValue(false)
         getUserByUsername.mockResolvedValue([
             {
@@ -92,7 +92,7 @@ describe('POST /api/auth/login', () => {
                 password: 'invalidpassword'
             });
         expect(response.status).toBe(401);
-        expect(response.body.error).toBe('Invalid password')
+        expect(response.body.error).toBe('Username or password is invalid')
     })
 })
 

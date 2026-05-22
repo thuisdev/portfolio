@@ -6,7 +6,7 @@ jest.mock('../db/userQueries')
 jest.mock('../middleware/auth-middleware')
 
 const { getAllUsers, createUser, getUserById, updateUserById, deleteUserById } = require('../db/userQueries')
-const { checkAuth } = require('../middleware/auth-middleware')
+const { checkAuth, requireAdmin } = require('../middleware/auth-middleware')
 
 const mockUser = {
     user_id: 1,
@@ -19,7 +19,11 @@ const mockUser = {
 // Get all Users
 describe('GET /api/users', () => {
     it('should return all users and status 200', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         getAllUsers.mockResolvedValue([mockUser])
 
         const response = await request(app).get('/api/users')
@@ -29,7 +33,11 @@ describe('GET /api/users', () => {
     })
 
     it('should return empty array and status 200', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         getAllUsers.mockResolvedValue([])
 
         const response = await request(app).get('/api/users')
@@ -39,16 +47,20 @@ describe('GET /api/users', () => {
     })
 
     it('should return 401 if unauthorized', async () => {
-        checkAuth.mockImplementation((req, res, next) => res.status(401).send('Access denied'))
+        checkAuth.mockImplementation((req, res, next) => res.status(401).json({ error: 'Access denied' }))
 
         const response = await request(app).get('/api/users')
 
         expect(response.status).toBe(401)
-        expect(response.text).toBe('Access denied')
+        expect(response.body.error).toBe('Access denied')
     })
 
     it('should return 500 on server error', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         getAllUsers.mockRejectedValue(new Error('DB Error'))
 
         const response = await request(app).get('/api/users')
@@ -61,17 +73,25 @@ describe('GET /api/users', () => {
 // Get User by id
 describe('GET /api/users/:id', () => {
     it('should return user by id and status 200', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         getUserById.mockResolvedValue([mockUser])
 
         const response = await request(app).get('/api/users/1')
 
         expect(response.status).toBe(200)
-        expect(response.body).toEqual([mockUser])
+        expect(response.body).toEqual(mockUser)
     })
 
     it('should return 404 if user not found', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         getUserById.mockResolvedValue([])
 
         const response = await request(app).get('/api/users/1')
@@ -81,7 +101,11 @@ describe('GET /api/users/:id', () => {
     })
 
     it('should return 500 on server error', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         getUserById.mockRejectedValue(new Error('DB Error'))
 
         const response = await request(app).get('/api/users/1')
@@ -94,8 +118,12 @@ describe('GET /api/users/:id', () => {
 // Update User by id
 describe('PUT /api/users/:id', () => {
     it('should update user and return status 200', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
-        updateUserById.mockResolvedValue(mockUser)
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
+        updateUserById.mockResolvedValue([mockUser])
 
         const response = await request(app)
             .put('/api/users/1')
@@ -106,18 +134,22 @@ describe('PUT /api/users/:id', () => {
     })
 
     it('should return 401 if unauthorized', async () => {
-        checkAuth.mockImplementation((req, res, next) => res.status(401).send('Access denied'))
+        checkAuth.mockImplementation((req, res, next) => res.status(401).json({ error: 'Access denied' }))
 
         const response = await request(app)
             .put('/api/users/1')
             .send({ name: 'Test', email: 'test@test.com' })
 
         expect(response.status).toBe(401)
-        expect(response.text).toBe('Access denied')
+        expect(response.body.error).toBe('Access denied')
     })
 
     it('should return 400 if fields are empty', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
 
         const response = await request(app)
             .put('/api/users/1')
@@ -128,7 +160,11 @@ describe('PUT /api/users/:id', () => {
     })
 
     it('should return 500 on server error', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         updateUserById.mockRejectedValue(new Error('DB Error'))
 
         const response = await request(app)
@@ -143,26 +179,34 @@ describe('PUT /api/users/:id', () => {
 // Delete User by id
 describe('DELETE /api/users/:id', () => {
     it('should delete user and return status 200', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
-        deleteUserById.mockResolvedValue([{ user_id: 1 }])
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
+        deleteUserById.mockResolvedValue([mockUser])
 
         const response = await request(app).delete('/api/users/1')
 
         expect(response.status).toBe(200)
-        expect(response.body).toEqual([{ user_id: 1 }])
+        expect(response.body).toEqual(mockUser)
     })
 
     it('should return 401 if unauthorized', async () => {
-        checkAuth.mockImplementation((req, res, next) => res.status(401).send('Access denied'))
+        checkAuth.mockImplementation((req, res, next) => res.status(401).json({ error: 'Access denied' }))
 
         const response = await request(app).delete('/api/users/1')
 
         expect(response.status).toBe(401)
-        expect(response.text).toBe('Access denied')
+        expect(response.body.error).toBe('Access denied')
     })
 
     it('should return 404 if user not found', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         deleteUserById.mockResolvedValue([])
 
         const response = await request(app).delete('/api/users/1')
@@ -172,7 +216,11 @@ describe('DELETE /api/users/:id', () => {
     })
 
     it('should return 500 on server error', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         deleteUserById.mockRejectedValue(new Error('DB Error'))
 
         const response = await request(app).delete('/api/users/1')

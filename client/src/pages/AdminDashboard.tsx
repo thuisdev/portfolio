@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAllUsers, updateUser, deleteUser } from '../api/users';
 import { getAllBlogs, createBlog, updateBlog, deleteBlog } from '../api/blogs';
-import { useAuth } from '../context/AuthProvider';
 import BlogModal from '../components/BlogModal';
 import UserModal from '../components/UserModal';
 
@@ -10,7 +9,6 @@ import type { Blog, BlogData } from '../api/blogs';
 import type { UpdateUserData } from '../api/users';
 
 const AdminDashboard = () => {
-    const { user } = useAuth()
     const [users, setUsers] = useState<any[]>([]);
     const [blogs, setBlogs] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
