@@ -30,12 +30,12 @@ router.get('/:id', async (req, res) => {
 
 // Create a new Blog
 router.post('/', checkAuth, requireAdmin, async (req, res) => {
-    const {title, content, blogPrvText, blogImgSrc, userId} = req.body
+    const {title, content, blogPrvText, blogImgSrc} = req.body
     try{
-        if (!title || !content || !blogPrvText || !blogImgSrc || !userId) {
+        if (!title || !content || !blogPrvText || !blogImgSrc) {
             return res.status(400).json({error : 'Data not valid'})
         }
-        const blog = await createBlog(title, content, blogPrvText, blogImgSrc, userId)
+        const blog = await createBlog(title, content, blogPrvText, blogImgSrc, req.user.user_id)
         res.json(blog)
     } catch(error) {
         console.error(error)
@@ -45,13 +45,13 @@ router.post('/', checkAuth, requireAdmin, async (req, res) => {
 // Update a Blog by id
 router.put('/:id', checkAuth, requireAdmin, async (req, res) => {
     const blogId = req.params.id
-    const {title, content, blogPrvText, blogImgSrc, userId} = req.body
+    const {title, content, blogPrvText, blogImgSrc} = req.body
     try{
-        if (!title || !content || !blogPrvText || !blogImgSrc || !userId) {
+        if (!title || !content || !blogPrvText || !blogImgSrc) {
                 return res.status(400).json({error : 'Data not valid'})
         } 
                
-        const blog = await updateBlogById(title, content, blogPrvText, blogImgSrc, blogId, userId)
+        const blog = await updateBlogById(title, content, blogPrvText, blogImgSrc, blogId, req.user.user_id)
         res.json(blog)
     } catch(error) {
         console.error(error)

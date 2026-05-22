@@ -90,7 +90,7 @@ const AdminDashboard = () => {
 
     const handleCreateBlog = async (blogData: BlogData) => {
         try {
-            await createBlog({ ...blogData, userId: user?.user_id });
+            await createBlog({ ...blogData });
             await fetchData()
             setShowCreateBlog(false);
             alert('Blog created successfully!')
@@ -247,9 +247,7 @@ const AdminDashboard = () => {
             {editUser && (
                 <UserModal
                     user={editUser}
-                    onSubmit={(email, name) => {
-                        handleEditUser(email, name)
-                    }}
+                    onSubmit={handleEditUser}
                     onClose={() => {
                         setEditUser(null)
                     }}

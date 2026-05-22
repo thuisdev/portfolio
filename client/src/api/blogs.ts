@@ -6,7 +6,6 @@ export interface Blog {
     content: string;
     blog_prv_text: string;
     blog_img_src: string;
-    user_id: number;
     created_at: string;
 };
 
@@ -15,7 +14,6 @@ export interface BlogData {
     content: string;
     blogPrvText: string;
     blogImgSrc: string;
-    userId?: number;
 }
 
 export const getAllBlogs = async () => {

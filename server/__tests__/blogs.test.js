@@ -6,7 +6,7 @@ jest.mock('../db/blogQueries')
 jest.mock('../middleware/auth-middleware')
 
 const { getAllBlogs, createBlog, getBlogById, updateBlogById, deleteBlogById } = require("../db/blogQueries")
-const { checkAuth } = require("../middleware/auth-middleware")
+const { checkAuth, requireAdmin } = require("../middleware/auth-middleware")
 
 
 // Get all Blogs
@@ -102,7 +102,11 @@ describe('GET /api/blogs/:id', () => {
 // Create a new Blog
 describe('POST /api/blogs', () => {
     it('should create a blog and return status 200', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         createBlog.mockResolvedValue({
             userId: 1,
             title: 'title',
@@ -114,7 +118,6 @@ describe('POST /api/blogs', () => {
         const response = await request(app)
             .post('/api/blogs')
             .send({
-                userId: 1,
                 title: 'title',
                 content: 'content',
                 blogPrvText: 'blogPrvText',
@@ -127,6 +130,7 @@ describe('POST /api/blogs', () => {
 
     it('should return 401 if user is unauthorized', async () => {
         checkAuth.mockImplementation((req, res, next) => res.status(401).send('Access denied'))
+        requireAdmin.mockImplementation((req, res, next) => next())
         createBlog.mockResolvedValue({
             userId: 1,
             title: 'title',
@@ -138,7 +142,6 @@ describe('POST /api/blogs', () => {
         const response = await request(app)
             .post('/api/blogs')
             .send({
-                userId: 1,
                 title: 'title',
                 content: 'content',
                 blogPrvText: 'blogPrvText',
@@ -151,6 +154,7 @@ describe('POST /api/blogs', () => {
 
     it('should return 400 if input fields are empty', async () => {
         checkAuth.mockImplementation((req, res, next) => next())
+        requireAdmin.mockImplementation((req, res, next) => next())
         createBlog.mockResolvedValue({
             userId: 1,
             title: '',
@@ -162,7 +166,6 @@ describe('POST /api/blogs', () => {
         const response = await request(app)
             .post('/api/blogs')
             .send({
-                userId: 1,
                 title: '',
                 content: '',
                 blogPrvText: '',
@@ -175,12 +178,12 @@ describe('POST /api/blogs', () => {
 
     it('should return server error 500', async () => {
         checkAuth.mockImplementation((req, res, next) => next())
+        requireAdmin.mockImplementation((req, res, next) => next())
         createBlog.mockRejectedValue(new Error('DB Error'))
 
         const response = await request(app)
             .post('/api/blogs')
             .send({
-                userId: 1,
                 title: 'title',
                 content: 'content',
                 blogPrvText: 'blogPrvText',
@@ -197,7 +200,11 @@ describe('POST /api/blogs', () => {
 // Update a Blog by id
 describe('PUT /api/blogs/:id', () => {
     it('should update blog and status 200', async () => {
-        checkAuth.mockImplementation((req, res, next) => next())
+        checkAuth.mockImplementation((req, res, next) => {
+            req.user = { user_id: 1, role: 'admin' }
+            next()
+        })
+        requireAdmin.mockImplementation((req, res, next) => next())
         updateBlogById.mockResolvedValue({
             userId: 1,
             title: 'title',
@@ -210,7 +217,6 @@ describe('PUT /api/blogs/:id', () => {
         const response = await request(app)
             .put('/api/blogs/1')
             .send({
-                userId: 1,
                 title: 'title',
                 content: 'content',
                 blogPrvText: 'blogPrvText',
@@ -224,6 +230,7 @@ describe('PUT /api/blogs/:id', () => {
 
     it('should return 401 if user is unauthorized', async () => {
         checkAuth.mockImplementation((req, res, next) => res.status(401).send('Access denied'))
+        requireAdmin.mockImplementation((req, res, next) => next())
         updateBlogById.mockResolvedValue({
             userId: 1,
             title: 'title',
@@ -235,7 +242,6 @@ describe('PUT /api/blogs/:id', () => {
         const response = await request(app)
             .put('/api/blogs/1')
             .send({
-                userId: 1,
                 title: 'title',
                 content: 'content',
                 blogPrvText: 'blogPrvText',
@@ -248,6 +254,7 @@ describe('PUT /api/blogs/:id', () => {
 
     it('should return 400 if input fields are empty', async () => {
         checkAuth.mockImplementation((req, res, next) => next())
+        requireAdmin.mockImplementation((req, res, next) => next())
         updateBlogById.mockResolvedValue({
             userId: 1,
             title: '',
@@ -260,7 +267,6 @@ describe('PUT /api/blogs/:id', () => {
         const response = await request(app)
             .put('/api/blogs/1')
             .send({
-                userId: 1,
                 title: '',
                 content: '',
                 blogPrvText: '',
@@ -274,12 +280,12 @@ describe('PUT /api/blogs/:id', () => {
 
     it('should return server error 500', async () => {
         checkAuth.mockImplementation((req, res, next) => next())
+        requireAdmin.mockImplementation((req, res, next) => next())
         updateBlogById.mockRejectedValue(new Error('DB Error'))
 
         const response = await request(app)
             .put('/api/blogs/1')
             .send({
-                userId: 1,
                 title: 'title',
                 content: 'content',
                 blogPrvText: 'blogPrvText',
@@ -297,6 +303,7 @@ describe('PUT /api/blogs/:id', () => {
 describe('DELETE /api/blogs/:id', () => {
     it('should delete blog and return status 200', async () => {
         checkAuth.mockImplementation((req, res, next) => next())
+        requireAdmin.mockImplementation((req, res, next) => next())
         deleteBlogById.mockResolvedValue([{ blog_id: 1 }])
 
         const response = await request(app)
@@ -308,6 +315,7 @@ describe('DELETE /api/blogs/:id', () => {
 
     it('should return 401 if user is unauthorized', async () => {
         checkAuth.mockImplementation((req, res, next) => res.status(401).send('Access denied'))
+        requireAdmin.mockImplementation((req, res, next) => next())
 
         const response = await request(app)
             .delete('/api/blogs/1')
@@ -318,6 +326,7 @@ describe('DELETE /api/blogs/:id', () => {
 
     it('should return 404 if blog not found', async () => {
         checkAuth.mockImplementation((req, res, next) => next())
+        requireAdmin.mockImplementation((req, res, next) => next())
         deleteBlogById.mockResolvedValue([])
 
         const response = await request(app)
@@ -329,6 +338,7 @@ describe('DELETE /api/blogs/:id', () => {
 
     it('should return server error 500', async () => {
         checkAuth.mockImplementation((req, res, next) => next())
+        requireAdmin.mockImplementation((req, res, next) => next())
         deleteBlogById.mockRejectedValue(new Error('DB Error'))
 
         const response = await request(app)
