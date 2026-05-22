@@ -1,75 +1,86 @@
 const express = require('express');
 const router = express.Router();
 const { getAllBlogs, createBlog, getBlogById, updateBlogById, deleteBlogById } = require("../db/blogQueries")
-const { checkAuth, requireAdmin } = require ("../middleware/auth-middleware")
+const { checkAuth, requireAdmin } = require("../middleware/auth-middleware")
 
 // Get all Blogs
 router.get('/', async (req, res) => {
-    try {const blog = await getAllBlogs() 
-    res.json(blog)
-    } catch(error) {
+    try {
+        const blog = await getAllBlogs()
+        res.json(blog)
+    } catch (error) {
         console.error(error)
-        res.status(500).json({error: 'Internal server error'})
+        res.status(500).json({ error: 'Internal server error' })
     }
 });
 
 // Get Blog by id
 router.get('/:id', async (req, res) => {
     const blogId = req.params.id
-    try{ 
+    try {
         const blog = await getBlogById(blogId)
         if (blog.length === 0) {
-            return res.status(404).json({ error: 'Blog not found'})
-    }  
+            return res.status(404).json({ error: 'Blog not found' })
+        }
         res.json(blog)
-    } catch(error) {
+    } catch (error) {
         console.error(error)
-        res.status(500).json({error: 'Internal server error'})}
+        res.status(500).json({ error: 'Internal server error' })
+    }
 });
 
 
 // Create a new Blog
 router.post('/', checkAuth, requireAdmin, async (req, res) => {
-    const {title, content, blogPrvText, blogImgSrc} = req.body
-    try{
+    const { title, content, blogPrvText, blogImgSrc } = req.body
+    try {
         if (!title || !content || !blogPrvText || !blogImgSrc) {
-            return res.status(400).json({error : 'Data not valid'})
+            return res.status(400).json({ error: 'Data not valid' })
         }
         const blog = await createBlog(title, content, blogPrvText, blogImgSrc, req.user.user_id)
         res.json(blog)
-    } catch(error) {
+    } catch (error) {
         console.error(error)
-        res.status(500).json({error: 'Internal server error'})}
+        res.status(500).json({ error: 'Internal server error' })
+    }
 });
 
 // Update a Blog by id
 router.put('/:id', checkAuth, requireAdmin, async (req, res) => {
     const blogId = req.params.id
-    const {title, content, blogPrvText, blogImgSrc} = req.body
-    try{
+    const { title, content, blogPrvText, blogImgSrc } = req.body
+    try {
+
         if (!title || !content || !blogPrvText || !blogImgSrc) {
-                return res.status(400).json({error : 'Data not valid'})
-        } 
-               
-        const blog = await updateBlogById(title, content, blogPrvText, blogImgSrc, blogId, req.user.user_id)
+            return res.status(400).json({ error: 'Data not valid' })
+        }
+
+        const blog = await updateBlogById(title, content, blogPrvText, blogImgSrc, blogId)
+
+        if (blog.length === 0) {
+            return res.status(404).json({ error: 'Blog not found' })
+        }
+        
         res.json(blog)
-    } catch(error) {
+    } catch (error) {
         console.error(error)
-        res.status(500).json({error: 'Internal server error'})}
+        res.status(500).json({ error: 'Internal server error' })
+    }
 });
 
 // Delete Blog by id
 router.delete('/:id', checkAuth, requireAdmin, async (req, res) => {
     const blogId = req.params.id
-    try{
+    try {
         const blog = await deleteBlogById(blogId)
         if (blog.length === 0) {
-            return res.status(404).json({error: 'Blog not found'})
+            return res.status(404).json({ error: 'Blog not found' })
         }
         res.json(blog)
-    } catch(error) {
+    } catch (error) {
         console.error(error)
-        res.status(500).json({error: 'Internal server error'})}
+        res.status(500).json({ error: 'Internal server error' })
+    }
 })
 
 

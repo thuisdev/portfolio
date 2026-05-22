@@ -34,12 +34,12 @@ const createBlog = async(title, content, blogPrvText, blogImgSrc, userId) => {
 };
 
 // Update Blog by id
-const updateBlogById = async(title, content, blogPrvText, blogImgSrc, blogId, userId) => {
+const updateBlogById = async(title, content, blogPrvText, blogImgSrc, blogId) => {
     const queryText = `
     UPDATE Blog SET title = $1, content = $2, blog_prv_text = $3, blog_img_src = $4
-    WHERE blog_id = $5 AND user_id = $6 
+    WHERE blog_id = $5
     RETURNING *`
-        const blog = await pool.query(queryText, [title, content, blogPrvText, blogImgSrc, blogId, userId])
+        const blog = await pool.query(queryText, [title, content, blogPrvText, blogImgSrc, blogId])
         return blog.rows
 }
 
