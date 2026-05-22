@@ -54,3 +54,7 @@ export const getStoredUser = () => {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
 };
+
+export const getMe = async () => {
+    return axios.get('/api/auth/me')
+}

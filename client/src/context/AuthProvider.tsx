@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import { login as apiLogin, register as apiRegister, logout as apiLogout, getStoredToken, getStoredUser } from '../api/auth';
+import { login as apiLogin, register as apiRegister, logout as apiLogout, getStoredToken, getStoredUser, getMe } from '../api/auth';
 import type { LoginCredentials, RegisterCredentials, AuthResponse } from '../api/auth';
 
 export interface User {
@@ -27,12 +27,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        const token = getStoredToken();
-        const storedUser = getStoredUser();
+        const initAuth = async () => {
+            const token = getStoredToken()
 
-        if (token && storedUser) {
-            setUser(storedUser)
+            if (!token) return
+
+            try {
+                const response = await getMe()
+                setUser(response.data)
+            } catch {
+                logout()
+                setUser(null)
+            }
         }
+
+        initAuth()
     }, [])
 
     const isLoggedIn = !!user

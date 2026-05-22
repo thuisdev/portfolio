@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const { jwtSecret } = require('../config')
 const validator = require('validator')
 const { getUserById, getUserByUsername, getUserByEmail, createUser } = require('../db/userQueries')
+const { checkAuth } = require('../middleware/auth-middleware')
 
 const register = async (req, res) => {
     const { username, name, email, password } = req.body
@@ -59,7 +60,7 @@ const register = async (req, res) => {
         console.error('❌ REGISTRATION ERROR:', error.message);
         res.status(500).json({ error: 'Server error' })
     }
-}
+};
 
 const login = async (req, res) => {
 
@@ -113,9 +114,26 @@ const login = async (req, res) => {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Server error' })
     }
-}
+};
+
+const getMe = async (req, res) => {
+    try {
+        const user = await getUserById(req.user.user_id)
+
+        if (user.length === 0) {
+            return res.status(404).json({ error: 'Username or password invalid' })
+        }
+
+        const { password, ...sanitized } = user[0]
+        res.json(sanitized)
+    }
+    catch (err) {
+        res.status(500).json({ error: 'Internal Server error' })
+    }
+};
 
 module.exports = {
     register,
-    login
+    login,
+    getMe
 };
