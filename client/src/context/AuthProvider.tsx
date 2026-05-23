@@ -13,6 +13,7 @@ export interface User {
 
 interface AuthContextType {
     user: User | null;
+    isLoading: boolean;
     isLoggedIn: boolean;
     isAdmin: boolean;
     login: (credentials: LoginCredentials) => Promise<void>;
@@ -26,21 +27,25 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
 
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         const initAuth = async () => {
             const token = getStoredToken()
-
-            if (!token) return
-
+            if (!token) {
+                setIsLoading(false)
+                return
+            }
             try {
                 const response = await getMe()
                 setUser(response.data)
             } catch {
                 logout()
                 setUser(null)
+            } finally {
+                setIsLoading(false)
             }
         }
-
         initAuth()
     }, [])
 
@@ -77,6 +82,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const value: AuthContextType = {
         user,
+        isLoading,
         isLoggedIn,
         isAdmin,
         login,
