@@ -38,7 +38,11 @@ const SingleBlog = () => {
     <>
       <article>
         <header className="text-left px-5 py-7 bg-cover bg-center bg-no-repeat h-70 md:h-100 lg:h-150 relative flex flex-col justify-between"
-          style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${blog?.blog_img_src}')` }}>
+          style={{
+            backgroundImage: blog?.blog_img_src
+              ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${encodeURI(blog.blog_img_src)}')`
+              : 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))'
+          }}>
           <Link to="/blogs"
             className="text-[16px] text-text-muted hover:text-white transition-colors duration-300">
             Back to Blogs
