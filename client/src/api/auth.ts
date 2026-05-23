@@ -55,7 +55,7 @@ export const getStoredUser = () => {
         const user = localStorage.getItem('user');
         return user ? JSON.parse(user) : null;
     }
-    catch (erro) {
+    catch (err) {
         localStorage.removeItem('user')
         localStorage.removeItem('token')
         return null

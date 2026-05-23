@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 const { jwtSecret } = require('../config')
 const validator = require('validator')
 const { getUserById, getUserByUsername, getUserByEmail, createUser } = require('../db/userQueries')
-const { checkAuth } = require('../middleware/auth-middleware')
 
 const register = async (req, res) => {
     const { username, name, email, password } = req.body
