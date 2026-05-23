@@ -20,8 +20,8 @@ const ProjectCard = ({ projectGithubUrl, projectPrvText, projectTitle, projectTi
                             transition-shadow duration-300
                             hover:shadow-[4px_4px_0_0_white] mr-5">
 
-                <a href={projectDemoLink}>
-                    <img src={projectImgSrc} alt="Project Preview" className="h-full object-cover"/>
+                <a href={projectDemoLink} target="_blank" rel="noopener noreferrer">
+                    <img src={projectImgSrc} alt="Project Preview" className="h-full object-cover" />
                 </a>
             </div>
             <h3 className="font-display text-[24px] font-semibold text-text-strong  mt-4 mb-4
@@ -41,7 +41,7 @@ const ProjectCard = ({ projectGithubUrl, projectPrvText, projectTitle, projectTi
                         </li>
                     ))}
                 </ul>
-                <a className="font-display text-text-strong text-[16px] [@media(hover:none)]:opacity-100" href={projectGithubUrl}>GitHub</a>
+                <a className="font-display text-text-strong text-[16px] [@media(hover:none)]:opacity-100" href={projectGithubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </article>
     )

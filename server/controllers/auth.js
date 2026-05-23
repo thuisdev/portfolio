@@ -121,7 +121,7 @@ const getMe = async (req, res) => {
         const user = await getUserById(req.user.user_id)
 
         if (user.length === 0) {
-            return res.status(404).json({ error: 'Username or password invalid' })
+            return res.status(404).json({ error: 'User not found' })
         }
 
         const { password, ...sanitized } = user[0]

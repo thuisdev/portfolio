@@ -241,17 +241,17 @@ const Home = () => {
               {/* <!-- Icons ---> */}
               <ul className="flex gap-3 text-[32px] text-white">
                 <li>
-                  <a href="https://github.com/thuisdev" target="_blank" aria-label="GitHub">
+                  <a href="https://github.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                     <i className="devicon-github-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="https://x.com/thuisdev" target="_blank" aria-label="X">
+                  <a href="https://x.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="X">
                     <i className="devicon-twitter-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/in/adrian-t-3b64172a4/?locale=de" target="_blank" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/in/adrian-t-3b64172a4/?locale=de" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                     <i className="devicon-linkedin-plain text-text-muted hover:text-brand/50 transition-colors duration-300"></i>
                   </a>
                 </li>
@@ -298,17 +298,17 @@ const Home = () => {
             <h3 className="font-inria text-text-strong text-[20px] lg:text-[22px] mb-4.5 mr-3">Say Hello</h3>
             <ul className="flex gap-4 justify-end text-[32px] lg:text-[38px] text-white mr-3">
               <li>
-                <a href="https://github.com/thuisdev" target="_blank" aria-label="GitHub">
+                <a href="https://github.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                   <i className="devicon-github-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i>
                 </a>
               </li>
               <li>
-                <a href="https://x.com/thuisdev" target="_blank" aria-label="X">
+                <a href="https://x.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="X">
                   <i className="devicon-twitter-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i>
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/in/adrian-t-3b64172a4/?locale=de" target="_blank" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/adrian-t-3b64172a4/?locale=de" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <i className="devicon-linkedin-plain text-text-muted hover:text-brand/50 transition-colors duration-300"></i>
                 </a>
               </li>
