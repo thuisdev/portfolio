@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthProvider"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import BlockchainBackground from "../components/BlockchainBackground"
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { register } = useAuth();
+  const { register, isLoggedIn } = useAuth();
 
   const [username, setUsername] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  if (isLoggedIn) return <Navigate to="/" replace />
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
