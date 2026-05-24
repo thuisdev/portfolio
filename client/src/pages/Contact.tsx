@@ -55,7 +55,11 @@ const Contact = () => {
               <li><a href="https://github.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="devicon-github-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i></a></li>
               <li><a href="https://x.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="X"><i className="devicon-twitter-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i></a></li>
               <li><a href="https://www.linkedin.com/in/adrian-t-3b64172a4/?locale=de" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="devicon-linkedin-plain text-text-muted hover:text-brand/50 transition-colors duration-300"></i></a></li>
-              <li><a href="https://mail.google.com/mail/?view=cm&to=adrian.thuis04@gmail.com" aria-label="E-Mail"><i className="text-text-muted hover:text-brand/50 transition-colors duration-300">✉</i></a></li>
+              <li>
+                <a href="https://cal.com/adrian-thuis/30min?overlayCalendar=true" aria-label="Cal">
+                <i className="text-text-muted hover:text-brand/50 transition-colors duration-300">✉</i>
+                </a>
+                </li>
             </ul>
           </div>
 

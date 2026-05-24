@@ -256,7 +256,7 @@ const Home = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://mail.google.com/mail/?view=cm&to=adrian.thuis04@gmail.com" aria-label="E-Mail ">
+                  <a href="https://cal.com/adrian-thuis/30min?overlayCalendar=true" aria-label="Cal">
                     <i className="text-text-muted hover:text-brand/50 transition-colors duration-300">✉</i>
                   </a>
                 </li>
@@ -313,7 +313,7 @@ const Home = () => {
                 </a>
               </li>
               <li>
-                <a href="https://mail.google.com/mail/?view=cm&to=adrian.thuis04@gmail.com" aria-label="E-Mail">
+                <a href="https://cal.com/adrian-thuis/30min?overlayCalendar=true" aria-label="Cal">
                   <i className="text-text-muted hover:text-brand/50 transition-colors duration-300">✉</i>
                 </a>
               </li>
