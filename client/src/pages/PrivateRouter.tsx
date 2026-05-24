@@ -9,15 +9,12 @@ export interface PrivateRouteProps {
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
     const { isLoggedIn, isLoading, isAdmin } = useAuth();
 
-    if (!isLoggedIn) {
-        return <Navigate to="/login" replace />;
-    }
+    if (isLoading) return null
 
-    if (!isAdmin) {
-        return <Navigate to="/404" replace />;
-    }
+    if (!isLoggedIn) return <Navigate to="/login" replace />
 
-    if (isLoading) { return <>{children}</>; }
-};
+    if (!isAdmin) return <Navigate to="/404" replace />
+    return <>{children}</>
+}
 
 export default PrivateRoute
