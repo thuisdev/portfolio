@@ -47,19 +47,20 @@ const Contact = () => {
               <h1 className="text-white font-display font-bold text-[36px] md:text-[44px] tracking-[2px] mb-6 text-left">
                 Get in touch with me!
               </h1>
-              <p className="text-text-muted text-[16px] leading-relaxed mb-10 text-left">
+              <p className="text-text-muted text-[16px] leading-relaxed mb-9 text-left">
                 Have a project in mind or just want to say hello? I'm always open to new opportunities, collaborations, and interesting conversations. Drop me a message and I'll get back to you!
               </p>
+
+              <a href="https://cal.com/adrian-thuis/30min?overlayCalendar=true"
+                target="_blank" rel="noopener noreferrer"
+                className="text-left block text-text-muted hover:text-white transition-colors duration-300 text-[14px] underline underline-offset-4 mb-10">
+                Book a 30min Call
+              </a>
             </div>
             <ul className="flex gap-6 text-[36px] md:text-[48px] justify-center md:justify-start">
               <li><a href="https://github.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="devicon-github-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i></a></li>
               <li><a href="https://x.com/thuisdev" target="_blank" rel="noopener noreferrer" aria-label="X"><i className="devicon-twitter-original text-text-muted hover:text-brand/50 transition-colors duration-300"></i></a></li>
               <li><a href="https://www.linkedin.com/in/adrian-t-3b64172a4/?locale=de" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="devicon-linkedin-plain text-text-muted hover:text-brand/50 transition-colors duration-300"></i></a></li>
-              <li>
-                <a href="https://cal.com/adrian-thuis/30min?overlayCalendar=true" aria-label="Cal">
-                <i className="text-text-muted hover:text-brand/50 transition-colors duration-300">✉</i>
-                </a>
-                </li>
             </ul>
           </div>
 

@@ -312,11 +312,6 @@ const Home = () => {
                   <i className="devicon-linkedin-plain text-text-muted hover:text-brand/50 transition-colors duration-300"></i>
                 </a>
               </li>
-              <li>
-                <a href="https://cal.com/adrian-thuis/30min?overlayCalendar=true" aria-label="Cal">
-                  <i className="text-text-muted hover:text-brand/50 transition-colors duration-300">✉</i>
-                </a>
-              </li>
             </ul>
           </div >
         </div >
