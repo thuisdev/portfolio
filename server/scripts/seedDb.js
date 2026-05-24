@@ -1,17 +1,21 @@
 const { createBlog } = require('../db/blogQueries')
 const { createUser } = require('../db/userQueries')
 const { hashPassword } = require('../utils/passwordUtils')
+const adminUsername = process.env.ADMIN_USERNAME || 'admin'
+const adminPassword = process.env.ADMIN_PASSWORD || 'admin123'
+const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com'
+const adminName = process.env.ADMIN_NAME || 'Admin User'
 
 const seedDb = async () => {
     // Passwörter hashen
-    const hashedAdminPw = await hashPassword('admin123');
+    const hashedAdminPw = await hashPassword(adminPassword);
     const hashedUserPw = await hashPassword('user123');
 
     // Admin User
     const admin = await createUser(
-        "admin",
-        "Admin User",
-        "admin@example.com",
+        adminUsername,
+        adminName,
+        adminEmail,
         hashedAdminPw,
         "admin"
     );
@@ -66,9 +70,9 @@ const seedDb = async () => {
         admin[0].user_id
     );
 
-    console.log(" Database seeded successfully!");
-    console.log(" Admin: admin / admin123");
-    console.log(" User: testuser / user123");
+    console.log("✅ Database seeded successfully!")
+    console.log(`Admin user: ${adminUsername}`)
+    console.log("Regular user: testuser / user123")
 }
 
 seedDb();
