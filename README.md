@@ -87,6 +87,7 @@ cp example.env .env
 # VITE_EMAILJS_PUBLIC_KEY=your_public_key
 
 # 6. Initialize & seed database
+# Make sure ADMIN_* variables are set in .env first!
 npm run db:init
 npm run db:seed
 
@@ -111,14 +112,20 @@ Open `http://localhost:3000`
 
 ## 🔑 Default Accounts
 
-After seeding the database, use these accounts:
+For local development, set admin credentials in your `server/.env`:
+
+```env
+ADMIN_USERNAME=your_admin
+ADMIN_PASSWORD=your_password
+```
+
+A regular test user is also seeded:
 
 | Role | Username | Password |
 |------|----------|----------|
-| Admin | `admin` | `admin123` |
 | User | `testuser` | `user123` |
 
-> ⚠️ Default credentials are for local development only. In production, set admin credentials via environment variables in your seed script.
+> ⚠️ Admin credentials are loaded from environment variables — never hardcode them.
 
 ---
 
@@ -452,6 +459,12 @@ PORT=3000
 
 # JWT
 JWT_SECRET=your_super_secret_key_here
+
+# Admin Seed User
+ADMIN_USERNAME=your_admin_username
+ADMIN_NAME=Your Name
+ADMIN_EMAIL=your@email.com
+ADMIN_PASSWORD=your_secure_password
 ```
 
 ### Client `.env` (in `client/`)
