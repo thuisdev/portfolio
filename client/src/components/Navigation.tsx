@@ -52,24 +52,24 @@ const Navigation = () => {
       <div>
         {isLoggedIn ? (
           <>
-            <Link to="/profile" className="inline-block text-[16px] text-text-muted px-4 py-2 mr-4.75 transition-all duration-300 hover:text-white">
+            <Link to="/profile" className="inline-block text-[16px] text-text-muted px-2 sm:px-4 py-2 mr-2 sm:mr-4.75 transition-all duration-300 hover:text-white">
               Profile
             </Link>
-            <button onClick={logout} className="inline-block text-[16px] text-text-muted px-4 py-2 mr-4.75 transition-all duration-300 hover:text-white">
+            <button onClick={logout} className="inline-block text-[16px] text-text-muted px-2 sm:px-4 py-2 mr-2 sm:mr-4.75 transition-all duration-300 hover:text-white">
               Logout
             </button>
           </>
         ) : (
           <>
-            <Link to="/login" className="inline-block text-[16px] text-text-muted px-4 py-2 mr-4.75 transition-all duration-300 hover:text-white">
+            <Link to="/login" className="inline-block text-[16px] text-text-muted px-2 sm:px-4 py-2 mr-2 sm:mr-4.75 transition-all duration-300 hover:text-white">
               Login
             </Link>
-            <Link to="/create-account" className="inline-block text-[16px] text-text-muted px-4 py-2 mr-4.75 transition-all duration-300 hover:text-white">
+            <Link to="/create-account" className="inline-block text-[16px] text-text-muted px-2 sm:px-4 py-2 mr-2 sm:mr-4.75 transition-all duration-300 hover:text-white">
               Sign Up
             </Link>
           </>
         )}
-        <Link to="/contact" className="inline-block text-[16px] px-4 py-2 mr-4.75 rounded-full
+        <Link to="/contact" className="inline-block text-[16px] px-2 sm:px-4 py-2 mr-2 sm:mr-4.75 rounded-full
         bg-white text-black font-medium
         hover:bg-white/90 transition-all duration-300">
           Let's Talk

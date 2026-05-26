@@ -24,6 +24,7 @@ const SignUp = () => {
     }
     catch (err: any) {
       setError(err.response?.data?.error || 'Registraion failed')
+      alert('Registration failed!')
     }
   }
 
