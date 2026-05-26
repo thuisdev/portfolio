@@ -80,12 +80,12 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="relative font-display font-bold text-[42px] md:text-[54px] lg:text-[62px] 2xl:text-[74px] md:tracking-[2px] text-center"
+            className="relative font-display font-bold text-[36px] sm:text-[42px] md:text-[54px] lg:text-[62px] 2xl:text-[74px] md:tracking-[2px] text-center"
           >
             {heroHeaders[hero]}
           </motion.h1>
         </AnimatePresence>
-        <p className="relative mt-4 text-text-muted text-[14px] md:text-[18px] 2xl:text-[20px] tracking-widest px-4 py-1.5 font-mono uppercase text-center whitespace-nowrap">
+        <p className="relative mt-4 text-text-muted text-[14px] md:text-[18px] 2xl:text-[20px] tracking-widest px-4 py-1.5 font-mono uppercase text-center md:whitespace-nowrap">
           Building on-chain. Shipping full stack.
         </p>
 
@@ -93,11 +93,11 @@ const Home = () => {
 
 
       {/* <!-- Featured Projects --> */}
-      < section id="featured" className="w-full py-16 md:py-20 lg:py-32 px-5 scroll-mt-[62px] border-b border-border-default" >
+      < section id="featured" className="w-full py-16 md:py-20 lg:py-32 px-5 scroll-mt-16 border-b border-border-default" >
         <div className="md:max-w-225 md:mx-auto lg:max-w-300 xl:max-w-full">
           <h2 className="font-display text-text-strong text-[32px] md:text-[40px] lg:text-[44px] font-semibold mb-10  md:mb-15">Featured Projects</h2>
           {/* <!-- Project Card --> */}
-          <ul className="text-left grid grid-cols-[repeat(auto-fit,360px)] md:grid-cols-[repeat(auto-fit,368px)] justify-center gap-10">
+          <ul className="text-left grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] md:grid-cols-[repeat(auto-fit,368px)] justify-center gap-10">
             {ProjectsData.map((project, index) => (
               <ProjectCard key={index} {...project} />
             ))}
@@ -106,7 +106,7 @@ const Home = () => {
       </section >
 
       {/* Skills & Experience */}
-      < section id="skills" className="items-center justify-center py-16 md:py-20 lg:py-32 border-b border-border-default w-full flex flex-col px-5 md:px-8 py-16 md:py-20" >
+      < section id="skills" className="items-center justify-center py-16 lg:py-32 border-b border-border-default w-full flex flex-col px-5 md:px-8 md:py-20" >
         <div className="md:max-w-225 md:mx-auto lg:max-w-300">
           <span className="mb-2 text-[14px] text-text-muted font-mono tracking-widest">Keep on growing</span>
           <h2 className="font-display text-text-strong text-[32px] md:text-[40px] lg:text-[44px] font-semibold mb-3.75">Skills & Experience</h2>
@@ -124,7 +124,7 @@ const Home = () => {
       </section >
 
       {/* <!-- Blog Section --> */}
-      < section id="blogPre" className="w-full py-16 md:py-20 lg:py-32 px-3 md:px-5 scroll-mt-[64px] border-b border-border-default" >
+      < section id="blogPre" className="w-full py-16 md:py-20 lg:py-32 px-3 md:px-5 scroll-mt-16 border-b border-border-default" >
         <div className="md:max-w-225 md:mx-auto lg:max-w-300 xl:max-w-full">
           <h2 className="font-display text-text-strong text-[32px] md:text-[40px] lg:text-[44px] font-semibold mb-10 md:mb-15">Blogs</h2>
           {/* <!-- Blog Card --> */}
@@ -156,7 +156,7 @@ const Home = () => {
       </section >
 
       {/* <!-- About me Section --> */}
-      <section id="aboutMe" className="flex items-center justify-center w-full py-16 md:py-20 lg:py-32 px-5 md:px-8 border-b border-border-default scroll-mt-[64px]">
+      <section id="aboutMe" className="flex items-center justify-center w-full py-16 md:py-20 lg:py-32 px-5 md:px-8 border-b border-border-default scroll-mt-16">
 
         <div className="w-full md:max-w-225 md:mx-auto lg:max-w-300">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">

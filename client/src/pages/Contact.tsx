@@ -65,7 +65,7 @@ const Contact = () => {
           </div>
 
           {/* Form */}
-          <div className="md:w-1/2 bg-black/40 border border-border-default rounded-[12px] p-6 md:p-8 flex flex-col gap-6">
+          <div className="md:w-1/2 bg-black/40 border border-border-default rounded-xl p-6 md:p-8 flex flex-col gap-6">
             <h2 className="font-display text-text-strong text-[22px] font-semibold text-left">Contact me</h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
