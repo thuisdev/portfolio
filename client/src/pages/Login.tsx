@@ -22,6 +22,7 @@ const Login = () => {
     }
     catch (err: any) {
       setError(err.response?.data?.error || 'Login failed')
+      alert('Login failed!')
     }
   }
 
