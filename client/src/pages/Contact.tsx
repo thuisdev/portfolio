@@ -9,7 +9,7 @@ const Contact = () => {
   const [message, setMessage] = useState('')
   const [sending, setSending] = useState(false)
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     setSending(true)
     try {

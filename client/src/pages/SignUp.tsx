@@ -15,15 +15,18 @@ const SignUp = () => {
 
   if (isLoggedIn) return <Navigate to="/" replace />
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
     try {
       await register({ username, name, email, password });
       navigate('/')
     }
-    catch (err: any) {
-      setError(err.response?.data?.error || 'Registraion failed')
+    catch (err: unknown) {
+      const message = typeof err === 'object' && err !== null && 'response' in err
+        ? ((err as { response?: { data?: { error?: string } } }).response?.data?.error ?? 'Registration failed')
+        : 'Registration failed'
+      setError(message)
       alert('Registration failed!')
     }
   }

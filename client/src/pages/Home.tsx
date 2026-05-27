@@ -7,16 +7,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import BlockchainBackground from "../components/BlockchainBackground"
 import SkillsMarquee from "../components/SkillsMarquee"
 import { ProjectsData } from "../components/ProjectsData.tsx"
-
-interface Blog {
-  blog_id: number
-  title: string
-  content: string
-  blog_prv_text: string
-  blog_img_src: string
-  user_id: number
-  created_at: string
-}
+import type { Blog } from "../types/models"
 
 const heroHeaders = [
   "Hi, I am Adrian",
@@ -42,7 +33,7 @@ const Home = () => {
 
       try {
         const res = await getAllBlogs()
-        setBlogs(res.data as Blog[])
+        setBlogs(res.data)
         setLoading(false)
       }
       catch (err) {

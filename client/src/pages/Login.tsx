@@ -13,15 +13,18 @@ const Login = () => {
 
   if (isLoggedIn) return <Navigate to="/" replace />
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
     try {
       await login({ username, password })
       navigate('/');
     }
-    catch (err: any) {
-      setError(err.response?.data?.error || 'Login failed')
+    catch (err: unknown) {
+      const message = typeof err === 'object' && err !== null && 'response' in err
+        ? ((err as { response?: { data?: { error?: string } } }).response?.data?.error ?? 'Login failed')
+        : 'Login failed'
+      setError(message)
       alert('Login failed!')
     }
   }

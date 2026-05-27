@@ -1,16 +1,7 @@
 import BlogCard from "../components/BlogCard"
 import { useEffect, useState } from "react"
 import { getAllBlogs } from "../api/blogs"
-
-interface Blog {
-  blog_id: number
-  title: string
-  content: string
-  blog_prv_text: string
-  blog_img_src: string
-  user_id: number
-  created_at: string
-}
+import type { Blog } from "../types/models"
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([])
@@ -23,7 +14,7 @@ const Blogs = () => {
 
       try {
         const res = await getAllBlogs()
-        setBlogs(res.data as Blog[])
+        setBlogs(res.data)
         setLoading(false)
       }
       catch (err) {

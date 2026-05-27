@@ -1,18 +1,6 @@
 import axios from './axiosConfig';
-
-export interface User {
-    user_id: number;
-    username: string;
-    name: string;
-    email: string;
-    role: string;
-    created_at: string;
-}
-
-export interface UpdateUserData {
-    name: string;
-    email: string;
-}
+import type { UpdateUserData } from '../types/api';
+import type { User } from '../types/models';
 
 export const getAllUsers = async () => {
     return axios.get<User[]>('/api/users');

@@ -1,27 +1,5 @@
 import axios from "./axiosConfig";
-
-export interface LoginCredentials {
-    username: string;
-    password: string;
-}
-
-export interface RegisterCredentials {
-    username: string;
-    name: string;
-    email: string;
-    password: string;
-}
-
-export interface AuthResponse {
-    token: string;
-    user: {
-        user_id: number;
-        username: string;
-        name: string;
-        email: string;
-        role: string;
-    };
-}
+import type { AuthResponse, LoginCredentials, RegisterCredentials } from "../types/api";
 
 export const login = async (credentials: LoginCredentials): Promise<AuthResponse> => {
     const response = await axios.post('/api/auth/login', credentials);

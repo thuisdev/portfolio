@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { User } from '../context/AuthProvider';
-import type { UpdateUserData } from '../api/users';
+import type { UpdateUserData } from '../types/api';
+import type { User } from '../types/models';
 
 interface UserModalProps {
     user: User;
@@ -18,7 +18,7 @@ const UserModal = ({ user, onSubmit, onClose }: UserModalProps) => {
         setEmail(user.email);
     }, [user]);
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         onSubmit(user.user_id, { name, email });
     };

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import type { Blog, BlogData } from '../api/blogs';
+import type { BlogData } from '../types/api';
+import type { Blog } from '../types/models';
 
 interface BlogModalProps {
-    blog: Blog | null;           // null = Create mode, Blog = Edit mode
+    blog: Blog | null;
     onSubmit: (blogId: number | null, blogData: BlogData) => void;
     onClose: () => void;
 }
@@ -25,7 +26,7 @@ const BlogModal = ({ blog, onSubmit, onClose }: BlogModalProps) => {
         }
     }, [blog]);
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         onSubmit(isEditing ? blog!.blog_id : null, {
             title,

@@ -4,13 +4,12 @@ import { getAllBlogs, createBlog, updateBlog, deleteBlog } from '../api/blogs';
 import BlogModal from '../components/BlogModal';
 import UserModal from '../components/UserModal';
 
-import type { User } from '../context/AuthProvider';
-import type { Blog, BlogData } from '../api/blogs';
-import type { UpdateUserData } from '../api/users';
+import type { BlogData, UpdateUserData } from '../types/api';
+import type { Blog, User } from '../types/models';
 
 const AdminDashboard = () => {
-    const [users, setUsers] = useState<any[]>([]);
-    const [blogs, setBlogs] = useState<any[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
+    const [blogs, setBlogs] = useState<Blog[]>([]);
     const [loading, setLoading] = useState(true);
 
     const [editBlog, setEditBlog] = useState<Blog | null>(null)

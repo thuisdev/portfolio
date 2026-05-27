@@ -1,16 +1,7 @@
 import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { getBlogById } from "../api/blogs"
-
-interface Blog {
-  blog_id: number
-  title: string
-  content: string
-  blog_prv_text: string
-  blog_img_src: string
-  user_id: number
-  created_at: string
-}
+import type { Blog } from "../types/models"
 
 const SingleBlog = () => {
   const { id } = useParams()
@@ -23,7 +14,7 @@ const SingleBlog = () => {
     const initBlog = async () => {
       try {
         const res = await getBlogById(id!)
-        setBlog((res.data as any)[0])
+        setBlog(res.data[0] ?? null)
         setLoading(false)
       }
       catch (err) {

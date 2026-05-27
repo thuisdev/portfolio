@@ -1,15 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { login as apiLogin, register as apiRegister, logout as apiLogout, getStoredToken, getMe } from '../api/auth';
-import type { LoginCredentials, RegisterCredentials, AuthResponse } from '../api/auth';
-
-export interface User {
-    user_id: number,
-    username: string,
-    name: string,
-    email: string,
-    role: string
-}
+import type { AuthResponse, LoginCredentials, RegisterCredentials } from '../types/api';
+import type { User } from '../types/models';
 
 interface AuthContextType {
     user: User | null;

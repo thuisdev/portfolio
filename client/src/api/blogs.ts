@@ -1,27 +1,13 @@
 import axios from './axiosConfig';
-
-export interface Blog {
-    blog_id: number;
-    title: string;
-    content: string;
-    blog_prv_text: string;
-    blog_img_src: string;
-    created_at: string;
-};
-
-export interface BlogData {
-    title: string;
-    content: string;
-    blogPrvText: string;
-    blogImgSrc: string;
-}
+import type { BlogData, BlogByIdResponse } from '../types/api';
+import type { Blog } from '../types/models';
 
 export const getAllBlogs = async () => {
     return axios.get<Blog[]>('/api/blogs');
 }
 
 export const getBlogById = async (id: string) => {
-    return axios.get<Blog>(`/api/blogs/${id}`);
+    return axios.get<BlogByIdResponse>(`/api/blogs/${id}`);
 }
 
 export const createBlog = async (blogData: BlogData) => {
